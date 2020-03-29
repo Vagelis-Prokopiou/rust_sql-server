@@ -1,3 +1,5 @@
+// apt-get install unixodbc-dev
+
 extern crate odbc;
 // Use this crate and set environmet variable RUST_LOG=odbc to see ODBC warnings
 extern crate env_logger;
