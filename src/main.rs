@@ -1,8 +1,7 @@
 // apt-get install unixodbc-dev
-//https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-ver15#debian17
+// https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-ver15#debian17
 
 extern crate odbc;
-// Use this crate and set environmet variable RUST_LOG=odbc to see ODBC warnings
 extern crate env_logger;
 
 use odbc::*;
@@ -41,7 +40,7 @@ fn connect() -> std::result::Result<(), DiagnosticRecord> {
     let mut buffer = String::new();
     // println!("Please enter connection string: ");
     // io::stdin().read_line(&mut buffer).unwrap();
-    buffer = "Driver={ODBC Driver 17 for SQL Server}; Server=localhost; PORT=1433; Database=test; UID=SA; PWD=123456aA!;".parse().unwrap();
+    buffer = "Driver={ODBC Driver 17 for SQL Server}; Server=localhost; Database=test; UID=SA; PWD=123456aA!;".parse().unwrap();
 
     let conn = env.connect_with_connection_string(&buffer)?;
     execute_statement(&conn)
@@ -49,7 +48,6 @@ fn connect() -> std::result::Result<(), DiagnosticRecord> {
 
 fn main() {
     env_logger::init();
-
     match connect() {
         Ok(()) => println!("Success"),
         Err(diag) => println!("Error: {}", diag),
